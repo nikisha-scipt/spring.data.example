@@ -1,6 +1,8 @@
 package ru.data.dao.service;
 
 import lombok.RequiredArgsConstructor;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageRequest;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import ru.data.dao.model.Product;
@@ -75,5 +77,11 @@ public class ProductService implements Store {
     @Transactional
     public List<Product> getBetweenMaxAndMin(int min, int max) {
         return productRepo.findMinAndMax(min, max);
+    }
+
+    @Override
+    @Transactional
+    public List<Product> findAll(int pageIndex, int pageSize) {
+        return productRepo.findAll(PageRequest.of(pageIndex, pageSize)).stream().toList();
     }
 }

@@ -1,6 +1,7 @@
 package ru.data.dao.controller;
 
 import lombok.RequiredArgsConstructor;
+import org.springframework.data.domain.Page;
 import org.springframework.web.bind.annotation.*;
 import ru.data.dao.model.Product;
 import ru.data.dao.service.ProductService;
@@ -10,16 +11,30 @@ import java.util.Optional;
 
 @RestController
 @RequiredArgsConstructor
+@RequestMapping("product")
 public class ProductController {
 
     private final ProductService service;
+
+    @GetMapping()
+    public String index() {
+        return "index";
+    }
+
+    @GetMapping(value = "/allPage")
+    public List<Product> findAll(@RequestParam(name = "p", defaultValue = "1") int pageIndex) {
+        if (pageIndex < 1) {
+            pageIndex = 1;
+        }
+        return service.findAll(pageIndex - 1, 10);
+    }
 
     @GetMapping(value = "/all")
     public List<Product> findAllProduct() {
         return service.getAllProduct();
     }
 
-    @GetMapping(value = "/product/{id}")
+    @GetMapping(value = "/{id}")
     public Optional<Product> findProductById(@PathVariable Long id) {
         return service.getByIdProduct(id);
     }
@@ -30,18 +45,18 @@ public class ProductController {
         return service.getAllProduct();
     }
 
-    @GetMapping(value = "/product/min/{min}")
+    @GetMapping(value = "/min/{min}")
     public List<Product> findMin(@PathVariable int min) {
         return service.getMin(min);
     }
 
-    @GetMapping(value = "/product/max/{max}")
+    @GetMapping(value = "/max/{max}")
     public List<Product> findMax(@PathVariable int max) {
         return service.getMax(max);
     }
 
     // http://localhost:22333/app/product/btw?min=66&max=77
-    @GetMapping(value = "/product/btw")
+    @GetMapping(value = "/btw")
     public List<Product> findBtw(@RequestParam(name = "min") int min, @RequestParam(name = "max") int max) {
         return service.getBetweenMaxAndMin(min, max);
     }

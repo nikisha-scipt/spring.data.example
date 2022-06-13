@@ -1,5 +1,6 @@
 package ru.data.dao.service;
 
+import org.springframework.data.domain.Page;
 import ru.data.dao.model.Product;
 
 import java.util.List;
@@ -22,5 +23,7 @@ public interface Store {
     List<Product> getMax(int max);
 
     List<Product> getBetweenMaxAndMin(int min, int max);
+
+    List<Product> findAll(int pageIndex, int pageSize);
 
 }
