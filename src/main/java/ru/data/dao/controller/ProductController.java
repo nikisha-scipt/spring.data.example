@@ -48,12 +48,10 @@ public class ProductController {
 
     @PostMapping(value = "/save")
     public Product save(@RequestBody Product product) {
-        Product res = new Product();
-        res.setId(product.getId());
-        res.setTitle(product.getTitle());
-        res.setPrice(product.getPrice());
-        service.save(res);
-        return res;
+        if (!service.isExist(product.getTitle())) {
+            service.save(product);
+        }
+        return product;
     }
 
 }
