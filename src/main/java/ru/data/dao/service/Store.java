@@ -1,6 +1,5 @@
 package ru.data.dao.service;
 
-import org.springframework.data.domain.Page;
 import ru.data.dao.model.Product;
 
 import java.util.List;
@@ -17,6 +16,8 @@ public interface Store {
     void save(Product product);
 
     boolean isExist(String newsTitle);
+
+    Product getById(Long id);
 
     List<Product> getMin(int min);
 

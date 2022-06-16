@@ -1,7 +1,7 @@
 package ru.data.dao.controller;
 
 import lombok.RequiredArgsConstructor;
-import org.springframework.data.domain.Page;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import ru.data.dao.model.Product;
 import ru.data.dao.service.ProductService;
@@ -67,6 +67,28 @@ public class ProductController {
             service.save(product);
         }
         return product;
+    }
+
+    @DeleteMapping(value = "/{id}")
+    public ResponseEntity deleteProduct(@PathVariable Long id) {
+        try {
+            return ResponseEntity.ok(service.delete(id));
+        } catch (Exception e) {
+            return ResponseEntity.badRequest().body("Произошла ошибка");
+        }
+    }
+
+    @PutMapping(value = "/update/{id}")
+    public ResponseEntity putProduct(@RequestBody Product product, @PathVariable Long id) {
+        try {
+            Product prd = service.getById(id);
+            prd.setTitle(product.getTitle());
+            prd.setPrice(product.getPrice());
+            service.save(prd);
+            return ResponseEntity.ok("OK");
+        } catch (Exception e) {
+            return ResponseEntity.badRequest().body("Произошла ошибка");
+        }
     }
 
 }

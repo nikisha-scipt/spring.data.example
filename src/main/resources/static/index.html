@@ -35,8 +35,22 @@
             </table>
             <div class="inc_dec">
                 <button type="button" class="btn inc" ng-click="increment()"></button>
+                <button ng-repeat="pageIndex in paginationArray" class="page-link" ng-click="loadProducts(pageIndex)">{{pageIndex}}</button>
                 <button type="button" class="btn dec" ng-click="decrement()"></button>
             </div>
+        </div>
+        <div class="input__table">
+            <form novalidate ng-submit="createNewProduct()">
+                <div class="mb-3">
+                    <label  class="form-label">Название</label>
+                    <input type="text" class="form-control" placeholder="Название" ng-model="new_product.title">
+                </div>
+                <div class="mb-3">
+                    <label  class="form-label">Цена</label>
+                    <input type="text" class="form-control-price" placeholder="Цена" ng-model="new_product.price">
+                </div>
+                <button type="submit" class="btn-primary">Создать</button>
+            </form>
         </div>
     </div>
 

@@ -88,4 +88,35 @@ body {
     content: '>';
 }
 
+.page-link {
+    font-size: 16px;
+    font-weight: 100;
+    padding: 15px 25px;
+    color: white;
+    border-radius: 40px;
+    border: none;
+    background: #ec1839;
+    transition: all 0.3s ease;
+}
+
+.input__table {
+    position: absolute;
+    top: 50%;
+    left: 80%;
+    transform: translate(-50%, -80%);
+}
+.mb-3 {
+    color: white;
+}
+
+.form-label {
+    width: 100%;
+    margin: 8px 0;
+    box-sizing: border-box;
+}
+
+.form-control-price {
+    margin-left: 29px;
+}
+
 
