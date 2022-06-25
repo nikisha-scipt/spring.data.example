@@ -1,7 +1,6 @@
 package ru.data.dao.service;
 
 import lombok.RequiredArgsConstructor;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -11,11 +10,9 @@ import ru.data.dao.repositories.ProductRepo;
 import java.util.List;
 import java.util.Optional;
 
-
 @Service
 @RequiredArgsConstructor
 public class ProductService implements Store {
-
 
     private final ProductRepo productRepo;
 
@@ -98,5 +95,18 @@ public class ProductService implements Store {
     @Transactional
     public List<Product> findAll(int pageIndex, int pageSize) {
         return productRepo.findAll(PageRequest.of(pageIndex, pageSize)).stream().toList();
+    }
+
+    @Transactional
+    public Product findByTitle(String title) {
+        Product res = new Product();
+        List<Product> temp = productRepo.findAll();
+        Optional<Product> exists = temp.stream().filter(e -> e.getTitle().equals(title)).findFirst();
+        if (exists.isPresent()) {
+            res.setId(exists.get().getId());
+            res.setTitle(exists.get().getTitle());
+            res.setPrice(exists.get().getPrice());
+        }
+        return res;
     }
 }

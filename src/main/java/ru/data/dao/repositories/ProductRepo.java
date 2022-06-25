@@ -17,5 +17,4 @@ public interface ProductRepo extends JpaRepository<Product, Long> {
     @Query("select p from Product p where p.price <= :max and p.price >= :min")
     List<Product> findMinAndMax(int min, int max);
 
-
 }

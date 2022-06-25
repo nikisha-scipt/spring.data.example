@@ -25,17 +25,25 @@ public class Product {
     @Column(name = "price")
     private int price;
 
+    public Product(String title, int price) {
+        this.title = title;
+        this.price = price;
+    }
 
     @Override
     public boolean equals(Object o) {
-        if (this == o) return true;
-        if (o == null || Hibernate.getClass(this) != Hibernate.getClass(o)) return false;
+        if (this == o) {
+            return true;
+        }
+        if (o == null || getClass() != o.getClass()) {
+            return false;
+        }
         Product product = (Product) o;
-        return id != null && Objects.equals(id, product.id);
+        return price == product.price && Objects.equals(id, product.id) && Objects.equals(title, product.title);
     }
 
     @Override
     public int hashCode() {
-        return getClass().hashCode();
+        return Objects.hash(id, title, price);
     }
 }
