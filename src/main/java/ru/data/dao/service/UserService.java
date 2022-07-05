@@ -9,11 +9,13 @@ import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import ru.data.dao.model.Privilege;
+import ru.data.dao.model.Product;
 import ru.data.dao.model.Role;
 import ru.data.dao.model.User;
 import ru.data.dao.repositories.UserRepo;
 
 import java.util.Collection;
+import java.util.List;
 import java.util.Optional;
 import java.util.stream.Collectors;
 
@@ -41,6 +43,16 @@ public class UserService implements UserDetailsService {
 
     private Collection<? extends GrantedAuthority> mapPrivilegesToAuthorities(Collection<Privilege> privileges) {
         return privileges.stream().map(privilege -> new SimpleGrantedAuthority(privilege.getName())).collect(Collectors.toList());
+    }
+
+    @Transactional
+    public void save(User user) {
+        userRepo.save(user);
+    }
+
+    @Transactional(readOnly = true)
+    public List<User> getAllProduct() {
+        return userRepo.findAll();
     }
 
 }

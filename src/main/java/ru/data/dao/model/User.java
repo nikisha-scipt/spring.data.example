@@ -1,12 +1,14 @@
 package ru.data.dao.model;
 
 import lombok.Data;
+import lombok.NoArgsConstructor;
 
 import javax.persistence.*;
 import java.util.List;
 
 @Entity
 @Data
+@NoArgsConstructor
 @Table(name = "users")
 public class User {
 
@@ -30,4 +32,9 @@ public class User {
         inverseJoinColumns = @JoinColumn (name = "role_id"))
     private List<Role> roles;
 
+    public User(String name, String password, String email) {
+        this.name = name;
+        this.password = password;
+        this.email = email;
+    }
 }
