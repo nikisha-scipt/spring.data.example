@@ -1,0 +1,49 @@
+@import "../variables.scss";
+
+.product_item {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  border: 16px solid $black50;
+  border-spacing: 5px;
+  border-radius: 20px;
+}
+
+.table {
+  font-size: 16px;
+}
+
+.table thead td {
+  color: $text-black700;
+  padding: 10px;
+  background: $black50;
+}
+
+.table tbody td {
+  color: $text-black700;
+  padding: 10px;
+  background: $black100;
+}
+
+.page-link {
+  font-size: 16px;
+  font-weight: 100;
+  padding: 15px 25px;
+  color: white;
+  border-radius: 40px;
+  border: none;
+  background: #ec1839;
+  transition: all 0.3s ease;
+}
+
+.input__table {
+  position: absolute;
+  top: 50%;
+  left: 140%;
+  transform: translate(-50%, -80%);
+}
+
+.mb-3 {
+  color: white;
+}
